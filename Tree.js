@@ -3,8 +3,8 @@ import Node from "./Node.js";
 class Tree {
   #root;
   constructor(arr) {
-    this.#root = this.buildTreeRecursion(arr, 0, arr.length);
-    // this.#root = this.buildTreeQueue(arr);
+    this.#root = this.buildTreeRecursion(arr, 0, arr.length-1);
+    this.#root = this.buildTreeQueue(arr);
   }
 
   buildTreeRecursion(arr, start, end) {
@@ -18,7 +18,23 @@ class Tree {
     return root;
   }
 
-  buildTreeQueue(arr) {}
+  buildTreeQueue(arr) {
+    if (arr.length === 0) return null;
+    let mid = Math.floor((0 + arr.length-1) / 2);
+    let root = new Node(arr[mid]);
+    let queue = [{ node: root, range: [0, arr.length-1] }];
+    let front = 0;
+
+    while (front < queue.length) {
+      let current = queue[front].node;
+      let [s,e] = queue[front].range;
+      console.log(s,e);
+      
+      front++;
+    }
+
+    return root;
+  }
 
   prettyPrint(node, prefix = "", isLeft = true) {
     if (node === null) {
