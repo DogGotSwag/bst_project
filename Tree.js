@@ -4,8 +4,8 @@ import mergeSort from "./mergSort.js";
 class Tree {
   #root;
   constructor(arr) {
-    // this.#root = this.buildTreeRecursion(arr, 0, arr.length-1);
-    this.#root = this.buildTreeQueue(arr);
+    // this.#root = this.buildTreeRecursion(mergeSort(arr), 0, arr.length - 1);
+    this.#root = this.buildTreeQueue(mergeSort(arr));
   }
 
   buildTreeRecursion(arr, start, end) {
@@ -21,25 +21,25 @@ class Tree {
 
   buildTreeQueue(arr) {
     if (arr.length === 0) return null;
-    let root = new Node(arr[Math.floor((0 + arr.length-1) / 2)]);
-    let queue = [{ node: root, range: [0, arr.length-1] }];
+    let root = new Node(arr[Math.floor((0 + arr.length - 1) / 2)]);
+    let queue = [{ node: root, range: [0, arr.length - 1] }];
     let front = 0;
 
     while (front < queue.length) {
       let current = queue[front].node;
-      let [s,e] = queue[front].range;
-      let m = Math.floor((s+e)/2); 
+      let [s, e] = queue[front].range;
+      let m = Math.floor((s + e) / 2);
 
-      if(s<m){
-        current.left = new Node(arr[Math.floor((s+m-1)/2)]);
-        queue.push({node: current.left, range:[s,m-1]}); 
+      if (s < m) {
+        current.left = new Node(arr[Math.floor((s + m - 1) / 2)]);
+        queue.push({ node: current.left, range: [s, m - 1] });
       }
 
-      if(m<e){
-        current.right = new Node(arr[Math.floor((m+1+e)/2)]);
-        queue.push({node: current.right, range:[m+1,e]}); 
+      if (m < e) {
+        current.right = new Node(arr[Math.floor((m + 1 + e) / 2)]);
+        queue.push({ node: current.right, range: [m + 1, e] });
       }
-      
+
       front++;
     }
 
