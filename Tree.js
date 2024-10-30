@@ -75,8 +75,12 @@ class Tree {
   }
 
   #deletePriv(value, currNode) {
-    if(currNode.data === value) console.log('Match');
-    
+    if(currNode === null) return;
+    if(currNode.data === value) currNode.data = 69;
+    else{
+      if(value > currNode.data) this.#deletePriv(value,currNode.right);
+      else this.#deletePriv(value, currNode.left);
+    }
   }
 
 
