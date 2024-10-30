@@ -4,8 +4,8 @@ import mergeSort from "./mergSort.js";
 class Tree {
   #root;
   constructor(arr) {
-    // this.#root = this.buildTreeRecursion(mergeSort(arr), 0, arr.length - 1);
-    this.#root = this.buildTreeQueue(mergeSort(arr));
+    this.#root = this.buildTreeRecursion(mergeSort(arr), 0, arr.length - 1);
+    // this.#root = this.buildTreeQueue(mergeSort(arr));
   }
 
   buildTreeRecursion(arr, start, end) {
@@ -44,6 +44,10 @@ class Tree {
     }
 
     return root;
+  }
+
+  insert(value){
+    if(this.#root === null) this.#root = new Node(value);
   }
 
   prettyPrint(node, prefix = "", isLeft = true) {
