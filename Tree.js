@@ -71,19 +71,24 @@ class Tree {
 
   delete(value) {
     if (this.#root === null) return;
-    else this.#deletePriv(value, this.#root);
+    else this.#deletePriv(value, this.#root, null);
   }
 
   #deletePriv(value, currNode) {
-    if(currNode === null) return;
-    if(currNode.data === value) currNode.data = 69;
-    else{
-      if(value > currNode.data) this.#deletePriv(value,currNode.right);
-      else this.#deletePriv(value, currNode.left);
+    if (currNode === null) return null;
+    if (currNode.data === value) {
+      if (currNode.left === null && currNode.right === null) return null;
+      if(currNode.left != null && currNode.right != null){
+        [currNode, currNode.left] = [currNode.right,currNode.left]
+        return currNode;
+      } 
+    } else {
+      if (value > currNode.data)
+        currNode.right = this.#deletePriv(value, currNode.right);
+      else currNode.left = this.#deletePriv(value, currNode.left);
     }
+    return currNode;
   }
-
-
 
   prettyPrint(node, prefix = "", isLeft = true) {
     if (node === null) {
