@@ -59,6 +59,7 @@ class Tree {
   }
 
   #insertPrivate(value, currNode) {
+    if(value === currNode.data) return;
     if (value > currNode.data) {
       if (currNode.right === null) currNode.right = new Node(value);
       else this.#insertPrivate(value, currNode.right);
