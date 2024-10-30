@@ -8,9 +8,9 @@ class Tree {
     this.#root = this.buildtree(arr);
   }
 
-  buildtree(arr){
+  buildtree(arr) {
     let newArray = mergeSort(removeDupe(arr));
-    
+
     return this.buildTreeRecursion(newArray, 0, newArray.length - 1);
     return this.buildTreeQueue(newArray);
   }
@@ -53,8 +53,19 @@ class Tree {
     return root;
   }
 
-  insert(value){
-    if(this.#root === null) this.#root = new Node(value);
+  insert(value) {
+    if (this.#root === null) this.#root = new Node(value);
+    else this.#insertPrivate(value, this.#root);
+  }
+
+  #insertPrivate(value, currNode) {
+    if (value > currNode.data) {
+      if (currNode.right === null) currNode.right = new Node(value);
+      else this.#insertPrivate(value, currNode.right);
+    } else {
+      if (currNode.left === null) currNode.left = new Node(value);
+      else this.#insertPrivate(value, currNode.left);
+    }
   }
 
   prettyPrint(node, prefix = "", isLeft = true) {
