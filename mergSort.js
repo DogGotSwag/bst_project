@@ -1,4 +1,5 @@
-function mergeSort(arr) {
+function mergeSort(array) {
+  let arr = [...array];
   if (arr.length === 1) return arr;
   if (arr.length === 0) return [];
   let sortedArray = [];
