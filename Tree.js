@@ -12,7 +12,7 @@ class Tree {
     let newArray = mergeSort(removeDupe(arr));
 
     return this.buildTreeRecursion(newArray, 0, newArray.length - 1);
-    return this.buildTreeQueue(newArray);
+    // return this.buildTreeQueue(newArray);
   }
 
   buildTreeRecursion(arr, start, end) {
@@ -59,7 +59,7 @@ class Tree {
   }
 
   #insertPrivate(value, currNode) {
-    if(value === currNode.data) return;
+    if (value === currNode.data) return;
     if (value > currNode.data) {
       if (currNode.right === null) currNode.right = new Node(value);
       else this.#insertPrivate(value, currNode.right);
@@ -68,6 +68,18 @@ class Tree {
       else this.#insertPrivate(value, currNode.left);
     }
   }
+
+  delete(value) {
+    if (this.#root === null) return;
+    else this.#deletePriv(value, this.#root);
+  }
+
+  #deletePriv(value, currNode) {
+    if(currNode.data === value) console.log('Match');
+    
+  }
+
+
 
   prettyPrint(node, prefix = "", isLeft = true) {
     if (node === null) {
