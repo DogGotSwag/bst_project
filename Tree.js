@@ -1,11 +1,18 @@
 import Node from "./Node.js";
 import mergeSort from "./mergSort.js";
+import removeDupe from "./removeDube.js";
 
 class Tree {
   #root;
   constructor(arr) {
-    this.#root = this.buildTreeRecursion(mergeSort(arr), 0, arr.length - 1);
-    // this.#root = this.buildTreeQueue(mergeSort(arr));
+    this.#root = this.buildtree(arr);
+  }
+
+  buildtree(arr){
+    let newArray = mergeSort(removeDupe(arr));
+    
+    return this.buildTreeRecursion(newArray, 0, newArray.length - 1);
+    return this.buildTreeQueue(newArray);
   }
 
   buildTreeRecursion(arr, start, end) {
