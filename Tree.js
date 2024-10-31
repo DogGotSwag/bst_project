@@ -87,14 +87,14 @@ class Tree {
         currNode = currNode.right;
         return currNode;
       } 
-      // if(currNode.right != null){
-      //   [currNode, currNode.left] = [currNode.right,currNode.left]
-      //   return currNode;
-      // }
-      // if(currNode.left != null){
-      //   [currNode, currNode.right] = [currNode.left,currNode.right]
-      //   return currNode;
-      // }
+      if(currNode.right != null){
+        [currNode, currNode.left] = [currNode.right,currNode.left]
+        return currNode;
+      }
+      if(currNode.left != null){
+        [currNode, currNode.right] = [currNode.left,currNode.right]
+        return currNode;
+      }
     } else {
       if (value > currNode.data)
         currNode.right = this.#deletePriv(value, currNode.right);
