@@ -71,11 +71,12 @@ class Tree {
 
   delete(value) {
     if (this.#root === null) return;
-    else this.#deletePriv(value, this.#root, null);
+    else this.#root = this.#deletePriv(value, this.#root, null);
   }
 
   #deletePriv(value, currNode) {
     if (currNode === null) return null;
+    
     if (currNode.data === value) {
       if (currNode.left === null && currNode.right === null) return null;
       if(currNode.left != null && currNode.right != null){
@@ -85,15 +86,12 @@ class Tree {
         }
         temp.left = currNode.left;
         currNode = currNode.right;
-        return currNode;
       } 
-      if(currNode.right != null){
-        [currNode, currNode.left] = [currNode.right,currNode.left]
-        return currNode;
+      else if(currNode.right != null){
+        [currNode, currNode.left] = [currNode.right,currNode.left];
       }
-      if(currNode.left != null){
-        [currNode, currNode.right] = [currNode.left,currNode.right]
-        return currNode;
+      else{
+        [currNode, currNode.right] = [currNode.left,currNode.right];
       }
     } else {
       if (value > currNode.data)
