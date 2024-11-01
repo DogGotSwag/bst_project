@@ -88,11 +88,8 @@ class Tree {
       while (succesor.left !== null) {
         succesor = succesor.left;
       }
-      [currNode, currNode.left, currNode.right] = [
-        succesor,
-        currNode.left,
-        (currNode.right = this.#deletePriv(succesor.data, currNode.right)),
-      ];
+      currNode.data = succesor.data;
+      currNode.right = this.#deletePriv(succesor.data, currNode.right);
     }
     return currNode;
   }
