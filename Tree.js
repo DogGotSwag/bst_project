@@ -81,19 +81,18 @@ class Tree {
     else if (value < currNode.data)
       currNode.left = this.#deletePriv(value, currNode.left);
     else {
-      if (currNode.left === null && currNode.right === null) return null;
-      if (currNode.left != null && currNode.right != null) {
-        let succesor = currNode.right;
-        while (succesor.left !== null) {
-          succesor = succesor.left;
-        }
-        [currNode, currNode.left, currNode.right] = [
-          succesor,
-          currNode.left,
-          (currNode.right = this.#deletePriv(succesor.data, currNode.right)),
-        ];
-      } else if (currNode.right != null) currNode = currNode.right;
-      else currNode = currNode.left;
+      if (currNode.right === null) return currNode.left;
+      if (currNode.left === null) return currNode.right;
+
+      let succesor = currNode.right;
+      while (succesor.left !== null) {
+        succesor = succesor.left;
+      }
+      [currNode, currNode.left, currNode.right] = [
+        succesor,
+        currNode.left,
+        (currNode.right = this.#deletePriv(succesor.data, currNode.right)),
+      ];
     }
     return currNode;
   }
