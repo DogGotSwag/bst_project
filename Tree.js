@@ -129,7 +129,7 @@ class Tree {
   levelOrder(callBack) {
     try {
       if (typeof callBack !== "function") throw new Error("Not a function");
-      if (this.#root === null) throw new Error('Empty tree');
+      if (this.#root === null) throw new Error("Empty tree");
       let q = [];
       q.push(this.#root);
       let front = 0;
@@ -144,6 +144,54 @@ class Tree {
     } catch (e) {
       console.error(`levelOrder Error: ${e.message}`);
     }
+  }
+
+  inOrder(callBack) {
+    try {
+      if (typeof callBack !== "function") throw new Error("Not a function");
+      if (this.#root === null) throw new Error("Empty tree");
+      this.#inOrderPrivate(callBack, this.#root);
+    } catch (e) {
+      console.error(`inOrder Error: ${e.message}`);
+    }
+  }
+  #inOrderPrivate(callBack, root) {
+    if (root === null) return;
+    this.#inOrderPrivate(callBack, root.left);
+    callBack(root);
+    this.#inOrderPrivate(callBack, root.right);
+  }
+
+  preOrder(callBack) {
+    try {
+      if (typeof callBack !== "function") throw new Error("Not a function");
+      if (this.#root === null) throw new Error("Empty tree");
+      this.#preOrderPrivate(callBack, this.#root);
+    } catch (e) {
+      console.error(`inOrder Error: ${e.message}`);
+    }
+  }
+  #preOrderPrivate(callBack, root) {
+    if (root === null) return;
+    callBack(root);
+    this.#preOrderPrivate(callBack, root.left);
+    this.#preOrderPrivate(callBack, root.right);
+  }
+
+  postOrder(callBack) {
+    try {
+      if (typeof callBack !== "function") throw new Error("Not a function");
+      if (this.#root === null) throw new Error("Empty tree");
+      this.#postOrderPrivate(callBack, this.#root);
+    } catch (e) {
+      console.error(`inOrder Error: ${e.message}`);
+    }
+  }
+  #postOrderPrivate(callBack, root) {
+    if (root === null) return;
+    this.#postOrderPrivate(callBack, root.left);
+    this.#postOrderPrivate(callBack, root.right);
+    callBack(root);
   }
 }
 
