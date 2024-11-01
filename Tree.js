@@ -120,10 +120,25 @@ class Tree {
   }
 
   #findPrivate(value, root) {
-    if(root === null) return undefined;
-    if(value < root.data) return this.#findPrivate(value, root.left);
-    if(value > root.data) return this.#findPrivate(value, root.right);
+    if (root === null) return undefined;
+    if (value < root.data) return this.#findPrivate(value, root.left);
+    if (value > root.data) return this.#findPrivate(value, root.right);
     return root.data;
+  }
+
+  levelOrder(callBack) {
+    if (this.#root === null) return undefined;
+    let q = [];
+    q.push(this.#root);
+    let front = 0;
+
+    while (front < q.length) {
+      let node = q[front];
+      callBack(node);
+      if(node.left !== null) q.push(node.left);
+      if(node.right !== null) q.push(node.right);
+      front++;
+    }
   }
 }
 
