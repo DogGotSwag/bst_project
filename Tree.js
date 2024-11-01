@@ -76,9 +76,9 @@ class Tree {
 
   #deletePriv(value, currNode) {
     if (currNode === null) return null;
-    if(value > currNode.data)
+    if (value > currNode.data)
       currNode.right = this.#deletePriv(value, currNode.right);
-    else if(value < currNode.data)
+    else if (value < currNode.data)
       currNode.left = this.#deletePriv(value, currNode.left);
     else {
       if (currNode.left === null && currNode.right === null) return null;
@@ -90,14 +90,11 @@ class Tree {
         [currNode, currNode.left, currNode.right] = [
           succesor,
           currNode.left,
-          currNode.right = this.#deletePriv(succesor.data, currNode.right)
+          (currNode.right = this.#deletePriv(succesor.data, currNode.right)),
         ];
-      } else if (currNode.right != null) {
-        [currNode, currNode.left] = [currNode.right, currNode.left];
-      } else {
-        [currNode, currNode.right] = [currNode.left, currNode.right];
-      }
-    } 
+      } else if (currNode.right != null) currNode = currNode.right;
+      else currNode = currNode.left;
+    }
     return currNode;
   }
 
