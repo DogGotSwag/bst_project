@@ -146,6 +146,31 @@ class Tree {
     }
   }
 
+  levelOrderRecursion(callBack) {
+    try {
+      if (typeof callBack !== "function" || typeof callBack === undefined) throw new Error("Not a function");
+      if (this.#root !== null)
+        this.levelOrderRecursionPrivate(callBack, [this.#root]);
+    } catch (e) {
+      console.error(`levelOrderRecursion Error: ${e.message}`)
+    }
+  }
+
+  levelOrderRecursionPrivate(callBack, queue) {
+    let front = 0;
+    let newQueue = [];
+    while (front < queue.length) {
+      let node = queue[front];
+      callBack(node);
+      if (node.left !== null) newQueue.push(node.left);
+      if (node.right !== null) newQueue.push(node.right);
+      front++;
+    }
+
+    if (newQueue.length > 0)
+      this.levelOrderRecursionPrivate(callBack, newQueue);
+  }
+
   inOrder(callBack) {
     try {
       if (typeof callBack !== "function") throw new Error("Not a function");
