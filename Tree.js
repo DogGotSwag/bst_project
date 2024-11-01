@@ -127,17 +127,22 @@ class Tree {
   }
 
   levelOrder(callBack) {
-    if (this.#root === null) return undefined;
-    let q = [];
-    q.push(this.#root);
-    let front = 0;
+    try {
+      if (typeof callBack !== "function") throw new Error("Not a function");
+      if (this.#root === null) throw new Error('Empty tree');
+      let q = [];
+      q.push(this.#root);
+      let front = 0;
 
-    while (front < q.length) {
-      let node = q[front];
-      callBack(node);
-      if(node.left !== null) q.push(node.left);
-      if(node.right !== null) q.push(node.right);
-      front++;
+      while (front < q.length) {
+        let node = q[front];
+        callBack(node);
+        if (node.left !== null) q.push(node.left);
+        if (node.right !== null) q.push(node.right);
+        front++;
+      }
+    } catch (e) {
+      console.error(`levelOrder Error: ${e.message}`);
     }
   }
 }
