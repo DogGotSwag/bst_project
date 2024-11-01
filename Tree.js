@@ -114,6 +114,17 @@ class Tree {
   print() {
     this.prettyPrint(this.#root);
   }
+
+  find(value) {
+    return this.#findPrivate(value, this.#root);
+  }
+
+  #findPrivate(value, root) {
+    if(root === null) return undefined;
+    if(value < root.data) return this.#findPrivate(value, root.left);
+    if(value > root.data) return this.#findPrivate(value, root.right);
+    return root.data;
+  }
 }
 
 export default Tree;
