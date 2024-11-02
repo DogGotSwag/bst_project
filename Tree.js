@@ -230,7 +230,7 @@ class Tree {
   }
 
   depth(node) {
-    if (node === null) return 0;
+    if (node === null) return undefined;
     return this.#depthPrivate(node, this.#root);
   }
 
