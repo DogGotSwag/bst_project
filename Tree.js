@@ -120,7 +120,7 @@ class Tree {
   }
 
   #findPrivate(value, root) {
-    if (root === null) return undefined;
+    if (root === null) return null;
     if (value < root.data) return this.#findPrivate(value, root.left);
     if (value > root.data) return this.#findPrivate(value, root.right);
     return root;
@@ -227,6 +227,17 @@ class Tree {
     
     if(leftHeight > rightHeight) return leftHeight;
     return rightHeight;
+  }
+
+  depth(node) {
+    if (node === null) return 0;
+    return this.#depthPrivate(node, this.#root);
+  }
+
+  #depthPrivate(node, root) {    
+    if (node.data < root.data) return 1+this.#depthPrivate(node, root.left);
+    if (node.data > root.data) return 1+this.#depthPrivate(node, root.right);
+    return 0;
   }
 }
 
