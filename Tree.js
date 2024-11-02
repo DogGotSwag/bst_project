@@ -257,6 +257,15 @@ class Tree {
     }
     return true;
   }
+
+  rebalance(){
+    let array = [];
+    let fillArray = (node) => {
+      array.push(node.data);
+    }
+    this.inOrder(fillArray);
+    this.#root = this.buildTreeRecursion(array, 0, array.length - 1);
+  }
 }
 
 export default Tree;
