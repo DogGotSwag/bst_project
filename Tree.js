@@ -224,8 +224,8 @@ class Tree {
     if (root === null) return -1;
     let leftHeight = 1 + this.height(root.left);
     let rightHeight = 1 + this.height(root.right);
-    
-    if(leftHeight > rightHeight) return leftHeight;
+
+    if (leftHeight > rightHeight) return leftHeight;
     return rightHeight;
   }
 
@@ -234,10 +234,28 @@ class Tree {
     return this.#depthPrivate(node, this.#root);
   }
 
-  #depthPrivate(node, root) {    
-    if (node.data < root.data) return 1+this.#depthPrivate(node, root.left);
-    if (node.data > root.data) return 1+this.#depthPrivate(node, root.right);
+  #depthPrivate(node, root) {
+    if (node.data < root.data) return 1 + this.#depthPrivate(node, root.left);
+    if (node.data > root.data) return 1 + this.#depthPrivate(node, root.right);
     return 0;
+  }
+
+  isBalanced() {
+    return this.#isBalancedPrivate(this.#root);
+  }
+  #isBalancedPrivate(root) {
+    let leftH = root.left != null ? this.height(root.left) : -1;
+    let rightH = root.right != null ? this.height(root.right) : -1;
+
+    if (leftH - rightH > 1 || leftH - rightH < -1) return false;
+
+    if (root.left !== null) {
+      if (this.#isBalancedPrivate(root.left) === false) return false;
+    }
+    if (root.right !== null) {
+      if (this.#isBalancedPrivate(root.right) === false) return false;
+    }
+    return true;
   }
 }
 
