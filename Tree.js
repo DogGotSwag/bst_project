@@ -244,10 +244,8 @@ class Tree {
     return this.#isBalancedPrivate(this.#root);
   }
   #isBalancedPrivate(root) {
-    let leftH = root.left != null ? this.height(root.left) : -1;
-    let rightH = root.right != null ? this.height(root.right) : -1;
-
-    if (leftH - rightH > 1 || leftH - rightH < -1) return false;
+    if (Math.abs(this.height(root.left) - this.height(root.right)) > 1)
+      return false;
 
     if (root.left !== null) {
       if (this.#isBalancedPrivate(root.left) === false) return false;
@@ -258,11 +256,11 @@ class Tree {
     return true;
   }
 
-  rebalance(){
+  rebalance() {
     let array = [];
     let fillArray = (node) => {
       array.push(node.data);
-    }
+    };
     this.inOrder(fillArray);
     this.#root = this.buildTreeRecursion(array, 0, array.length - 1);
   }
