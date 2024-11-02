@@ -123,7 +123,7 @@ class Tree {
     if (root === null) return undefined;
     if (value < root.data) return this.#findPrivate(value, root.left);
     if (value > root.data) return this.#findPrivate(value, root.right);
-    return root.data;
+    return root;
   }
 
   levelOrder(callBack) {
@@ -148,11 +148,12 @@ class Tree {
 
   levelOrderRecursion(callBack) {
     try {
-      if (typeof callBack !== "function" || typeof callBack === undefined) throw new Error("Not a function");
+      if (typeof callBack !== "function" || typeof callBack === undefined)
+        throw new Error("Not a function");
       if (this.#root !== null)
         this.levelOrderRecursionPrivate(callBack, [this.#root]);
     } catch (e) {
-      console.error(`levelOrderRecursion Error: ${e.message}`)
+      console.error(`levelOrderRecursion Error: ${e.message}`);
     }
   }
 
@@ -217,6 +218,15 @@ class Tree {
     this.#postOrderPrivate(callBack, root.left);
     this.#postOrderPrivate(callBack, root.right);
     callBack(root);
+  }
+
+  height(root) {
+    if (root === null) return -1;
+    let leftHeight = 1 + this.height(root.left);
+    let rightHeight = 1 + this.height(root.right);
+    
+    if(leftHeight > rightHeight) return leftHeight;
+    return rightHeight;
   }
 }
 
